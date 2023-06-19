@@ -22,6 +22,7 @@ function createNewListItem() {
       class="p-1 grow border-2 rounded-md focus:border-cyan-400 focus:outline-none"
       type="text"
       v-model="itemTitle"
+      @keyup.enter="createNewListItem"
     />
     <button
       class="px-2 text-blue-400 hover:text-blue-600 transition-transform duration-300 hover:rotate-90"

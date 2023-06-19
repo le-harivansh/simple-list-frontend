@@ -2,7 +2,7 @@
 import type { ListItem } from '../models/list-item';
 
 defineProps<{ item: ListItem }>();
-defineEmits<{ ( event: 'delete', id: number ): void }>()
+defineEmits<{ (event: 'delete', id: number): void }>();
 </script>
 
 <template>

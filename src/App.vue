@@ -4,15 +4,15 @@ import ListItem from './components/ListItem.vue';
 import { ListItem as Item } from './models/list-item';
 
 const listItems: Item[] = reactive([
-  new Item(1, "Item no. 1"),
-  new Item(2, "Item no. 2"),
-  new Item(3, "Item no. 3"),
-  new Item(4, "Item no. 4"),
-  new Item(5, "Item no. 5"),
+  new Item(1, 'Item no. 1'),
+  new Item(2, 'Item no. 2'),
+  new Item(3, 'Item no. 3'),
+  new Item(4, 'Item no. 4'),
+  new Item(5, 'Item no. 5'),
 ]);
 
 function deleteItemWithId(id: number) {
-  console.log(`deleting item: ${id}`)
+  console.log(`deleting item: ${id}`);
 }
 </script>
 

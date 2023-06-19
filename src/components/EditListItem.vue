@@ -34,9 +34,14 @@ function cancelEdit() {
       class="p-1 grow border-2 rounded-md focus:border-cyan-400 focus:outline-none"
       type="text"
       v-model="itemTitle"
+      data-test="list-item-title-input"
       @keyup.enter="updateListItem"
     />
-    <button class="px-2 text-blue-400 hover:text-blue-600" @click="updateListItem">
+    <button
+      class="px-2 text-blue-400 hover:text-blue-600"
+      @click="updateListItem"
+      data-test="list-item-update-button"
+    >
       <svg
         xmlns="http://www.w3.org/2000/svg"
         fill="none"
@@ -48,7 +53,11 @@ function cancelEdit() {
         <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" />
       </svg>
     </button>
-    <button class="px-2 text-yellow-400 hover:text-yellow-600" @click="cancelEdit">
+    <button
+      class="px-2 text-yellow-400 hover:text-yellow-600"
+      @click="cancelEdit"
+      data-test="list-item-cancel-update-button"
+    >
       <svg
         xmlns="http://www.w3.org/2000/svg"
         fill="none"

@@ -5,6 +5,9 @@ module.exports = {
     "./src/**/*.{vue,ts}",
   ],
   theme: {
+    fontFamily: {
+      display: ["Orbit"],
+    },
     extend: {},
   },
   plugins: [],

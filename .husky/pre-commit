@@ -1,7 +1,8 @@
 #!/usr/bin/env sh
 . "$(dirname -- "$0")/_/husky.sh"
 
-yarn run test:unit
-yarn run test:e2e
 yarn run lint
 yarn run format
+
+yarn run test:unit
+yarn run test:e2e

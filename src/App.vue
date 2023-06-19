@@ -11,16 +11,19 @@ onMounted(async () => {
   const { data: retrievedItems } = await axios.get<Item[]>('/items');
 
   retrievedItems.forEach((item) => listItems.push(item));
-})
+});
 
 async function deleteItemWithId(id: number) {
   await axios.delete(`/item/${id}`);
 
-  listItems.splice(listItems.findIndex(({ id: itemId }) => itemId === id), 1);
+  listItems.splice(
+    listItems.findIndex(({ id: itemId }) => itemId === id),
+    1
+  );
 }
 
 async function createNewItem(title: string) {
-  const { data: newItem } = await axios.post<Item>('/item', { title })
+  const { data: newItem } = await axios.post<Item>('/item', { title });
 
   listItems.push(newItem);
 }

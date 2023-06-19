@@ -1,18 +1,21 @@
 <script setup lang="ts">
-import { reactive } from 'vue';
+import axios from 'axios';
+import { onMounted, reactive } from 'vue';
 import ListItem from './components/ListItem.vue';
 import { ListItem as Item } from './models/list-item';
 
-const listItems: Item[] = reactive([
-  new Item(1, 'Item no. 1'),
-  new Item(2, 'Item no. 2'),
-  new Item(3, 'Item no. 3'),
-  new Item(4, 'Item no. 4'),
-  new Item(5, 'Item no. 5'),
-]);
+const listItems: Item[] = reactive([]);
 
-function deleteItemWithId(id: number) {
-  console.log(`deleting item: ${id}`);
+onMounted(async () => {
+  const { data: retrievedItems } = await axios.get<Item[]>('/items');
+
+  retrievedItems.forEach((item) => listItems.push(item));
+})
+
+async function deleteItemWithId(id: number) {
+  await axios.delete(`/item/${id}`);
+
+  listItems.splice(listItems.findIndex(({ id: itemId }) => itemId === id), 1);
 }
 </script>
 

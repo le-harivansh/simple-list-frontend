@@ -1,11 +1,19 @@
 <script setup lang="ts">
 import axios from 'axios';
-import { onMounted, reactive } from 'vue';
+import { computed, onMounted, reactive, ref, type Ref } from 'vue';
 import ListItem from './components/ListItem.vue';
 import { ListItem as Item } from './models/list-item';
 import CreateListItem from './components/CreateListItem.vue';
+import EditListItem from './components/EditListItem.vue';
 
 const listItems: Item[] = reactive([]);
+
+const currentlyEditingListItemId: Ref<number | null> = ref(null);
+const currentlyEditingListItem = computed(
+  () =>
+    listItems.find(({ id: itemId }) => itemId === currentlyEditingListItemId.value) ||
+    new Item(0, '')
+);
 
 onMounted(async () => {
   const { data: retrievedItems } = await axios.get<Item[]>('/items');
@@ -13,7 +21,7 @@ onMounted(async () => {
   retrievedItems.forEach((item) => listItems.push(item));
 });
 
-async function deleteItemWithId(id: number) {
+async function deleteItem(id: number) {
   await axios.delete(`/item/${id}`);
 
   listItems.splice(
@@ -26,6 +34,26 @@ async function createNewItem(title: string) {
   const { data: newItem } = await axios.post<Item>('/item', { title });
 
   listItems.push(newItem);
+}
+
+function editItem(id: number) {
+  currentlyEditingListItemId.value = id;
+}
+
+function cancelEdit() {
+  currentlyEditingListItemId.value = null;
+}
+
+async function updateListItem(item: Item) {
+  const { data: updatedItem } = await axios.put<Item>('/item', item);
+
+  listItems.splice(
+    listItems.findIndex(({ id: itemId }) => itemId === updatedItem.id),
+    1,
+    updatedItem
+  );
+
+  currentlyEditingListItemId.value = null;
 }
 </script>
 
@@ -40,11 +68,23 @@ async function createNewItem(title: string) {
             v-for="item in listItems"
             :key="item.id"
             :item="item"
-            @delete="deleteItemWithId"
+            @edit="editItem"
+            @delete="deleteItem"
           />
         </div>
 
-        <CreateListItem class="pt-4" @create="createNewItem" />
+        <CreateListItem
+          v-if="currentlyEditingListItemId === null"
+          class="pt-4"
+          @create="createNewItem"
+        />
+        <EditListItem
+          v-else
+          :item="currentlyEditingListItem"
+          class="pt-4"
+          @update="updateListItem"
+          @cancel="cancelEdit"
+        />
       </main>
     </div>
   </div>

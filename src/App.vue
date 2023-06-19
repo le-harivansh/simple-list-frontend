@@ -58,8 +58,8 @@ async function updateListItem(item: Item) {
 </script>
 
 <template>
-  <div class="w-screen h-screen flex justify-center py-8 bg-slate-100">
-    <div class="p-2 w-1/3 flex flex-col bg-white shadow-md rounded-xl">
+  <div class="w-screen h-screen flex justify-center sm:py-8 bg-slate-100">
+    <div class="p-2 sm:w-1/2 xl:w-1/3 flex flex-col bg-white shadow-md sm:rounded-xl">
       <h1 class="text-red-500 text-3xl font-display text-center">Simple List</h1>
 
       <main class="pt-4 grow flex flex-col">

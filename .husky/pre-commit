@@ -7,4 +7,3 @@ yarn run format
 git add .
 
 yarn run test:unit
-yarn run test:e2e

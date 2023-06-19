@@ -10,6 +10,10 @@ const listItems: Item[] = reactive([
   new Item(4, "Item no. 4"),
   new Item(5, "Item no. 5"),
 ]);
+
+function deleteItemWithId(id: number) {
+  console.log(`deleting item: ${id}`)
+}
 </script>
 
 <template>
@@ -23,7 +27,8 @@ const listItems: Item[] = reactive([
         <ListItem
           v-for="item in listItems"
           :key="item.id"
-          :title="item.title"
+          :item="item"
+          @delete="deleteItemWithId"
         />
       </main>
     </div>

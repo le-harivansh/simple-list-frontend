@@ -1,6 +1,6 @@
 import { describe, it, expect, beforeEach } from 'vitest';
 
-import { VueWrapper, mount } from '@vue/test-utils';
+import { VueWrapper, shallowMount } from '@vue/test-utils';
 import ListItem from './ListItem.vue';
 import { ListItem as Item } from '../models/list-item';
 
@@ -9,15 +9,15 @@ describe('ListItem', () => {
   let wrapper: VueWrapper;
 
   beforeEach(() => {
-    wrapper = mount(ListItem, { props: { item } });
+    wrapper = shallowMount(ListItem, { props: { item } });
   });
 
   it('renders properly', () => {
     expect(wrapper.text()).toContain(item.title);
   });
 
-  it('emits the `edit` event with the item-id from its props', () => {
-    wrapper.find('[data-test="list-item-edit-button"]').trigger('click');
+  it('emits the `edit` event with the item-id from its props', async () => {
+    await wrapper.get('[data-test="list-item-edit-button"]').trigger('click');
 
     const emittedEvent = wrapper.emitted();
 
@@ -26,7 +26,7 @@ describe('ListItem', () => {
   });
 
   it('emits the `delete` event with the item-id from its props', () => {
-    wrapper.find('[data-test="list-item-delete-button"]').trigger('click');
+    wrapper.get('[data-test="list-item-delete-button"]').trigger('click');
 
     const emittedEvent = wrapper.emitted();
 

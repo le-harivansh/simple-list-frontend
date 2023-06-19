@@ -4,7 +4,7 @@ import ListItem from './components/ListItem.vue';
 
 <template>
   <header>
-    <h1>header</h1>
+    <h1 class="text-red-500 text-3xl">header</h1>
   </header>
 
   <main>

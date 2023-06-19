@@ -12,7 +12,11 @@ defineEmits<{
   <div class="p-1 flex space-x-1 border-2 border-cyan-400 rounded-md">
     <p class="flex-1">{{ item.title }}</p>
 
-    <button class="text-yellow-400 hover:text-yellow-600" @click="$emit('edit', item.id)">
+    <button
+      class="text-yellow-400 hover:text-yellow-600"
+      @click="$emit('edit', item.id)"
+      data-test="list-item-edit-button"
+    >
       <svg
         xmlns="http://www.w3.org/2000/svg"
         fill="none"
@@ -28,7 +32,11 @@ defineEmits<{
         />
       </svg>
     </button>
-    <button class="text-red-300 hover:text-red-500" @click="$emit('delete', item.id)">
+    <button
+      class="text-red-300 hover:text-red-500"
+      @click="$emit('delete', item.id)"
+      data-test="list-item-delete-button"
+    >
       <svg
         xmlns="http://www.w3.org/2000/svg"
         fill="none"

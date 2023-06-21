@@ -65,10 +65,11 @@ async function updateListItem(item: Item) {
       <main class="pt-4 grow flex flex-col">
         <div class="grow flex flex-col space-y-2" data-test="list-items">
           <ListItem
-            v-for="item in listItems"
+            v-for="(item, index) in listItems"
             :key="item.id"
             :item="item"
             :data-test="`list-item-${item.id}`"
+            :data-cy="`list-item-${index}`"
             @edit="editItem"
             @delete="deleteItem"
           />

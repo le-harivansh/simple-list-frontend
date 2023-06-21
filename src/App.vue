@@ -63,11 +63,12 @@ async function updateListItem(item: Item) {
       <h1 class="text-red-500 text-3xl font-display text-center">Simple List</h1>
 
       <main class="pt-4 grow flex flex-col">
-        <div class="grow flex flex-col space-y-2">
+        <div class="grow flex flex-col space-y-2" data-test="list-items">
           <ListItem
             v-for="item in listItems"
             :key="item.id"
             :item="item"
+            :data-test="`list-item-${item.id}`"
             @edit="editItem"
             @delete="deleteItem"
           />
